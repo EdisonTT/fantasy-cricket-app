@@ -1,0 +1,23 @@
+{
+  "name": "fantasy-cricket-app",
+  "version": "1.0.0",
+  "description": "This repository will give a mock API for fantasy cricket app",
+  "main": "index.js",
+  "scripts": {
+    "test": "",
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "joi": "^17.13.1",
+    "mongoose": "^8.3.4"
+  }
+}
