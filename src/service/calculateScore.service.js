@@ -4,15 +4,18 @@ const dbConnector = require("./dbConnector");
 module.exports = new (class CalculateTeamScoreService {
   constructor() {}
 
-  async calculateTeamScore(players) {
+  async calculateTeamScore(players, cap, viceCap) {
     let totalScore = 0;
     const playersScore = {};
     for (let p of players) {
       const bs = await this.calculateBattingScore(p);
       const bowlingScore = await this.calculateBowlingScore(p);
       const fs = await this.calculateFieldingScore(p);
-      totalScore += bs + bowlingScore + fs;
-      playersScore[p] = bs + bowlingScore + fs;
+      let pScore = bs + bowlingScore + fs;
+      if (p === cap) pScore *= 2;
+      if (p === viceCap) pScore *= 1.5;
+      totalScore += pScore;
+      playersScore[p] = pScore;
     }
     console.log("Individual player score", playersScore);
     return totalScore;
@@ -129,7 +132,7 @@ module.exports = new (class CalculateTeamScoreService {
         }
       }
       c += matchDataTwo.length;
-      s +=( matchDataTwo.length * 8);
+      s += matchDataTwo.length * 8;
       if (c >= 3) s += 4;
       return s;
     } catch (error) {

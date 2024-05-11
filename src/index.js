@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./route");
-const BadRequestError = require("./error/error");
 
 const app = express();
 
@@ -18,7 +17,6 @@ app.use((req, res, next) => {
 app.use(routes);
 // MW to handle Error
 app.use((err, req, res, next) => {
-  console.log('error from MW,', err)
   if (err?.status) {
     res
       .status(err.status)

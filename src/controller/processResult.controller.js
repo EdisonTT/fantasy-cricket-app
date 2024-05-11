@@ -18,7 +18,9 @@ async function processResultController(req, res, next) {
       // calculate the score of each team
       // store team score to the DB
       const score = await calculateTeamScoreService.calculateTeamScore(
-        t.players
+        t.players,
+        t.captain,
+        t.viceCaptain
       );
       await dbConnector.updateTeamScore(t.teamName, score);
       teamScore[t.teamName] = score;
